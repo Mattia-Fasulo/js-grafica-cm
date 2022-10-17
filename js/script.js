@@ -56,7 +56,7 @@ function play() {
 
     while (bombs.length < numBomb) {
         const bomb = randomNumber(1, numBox);
-        if(!bombs.includes(bomb)){
+        if (!bombs.includes(bomb)) {
             bombs.push(bomb);
         }
     }
@@ -72,8 +72,11 @@ function play() {
         <span>${num}</span>
         `
         box.addEventListener('click', function () {
-            if(bombs.includes(num)){
+            if (bombs.includes(num)) {
                 box.classList.add('red')
+                box.innerHTML = `
+                <i class="fa-solid fa-bomb h-80 v-80"></i>
+                `
             }
             else {
                 box.classList.add('cyan')
