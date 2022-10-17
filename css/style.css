@@ -1,0 +1,42 @@
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* scaffold */
+body {
+    font-family: 'Source Code Pro', monospace;;
+}
+
+header, footer {
+    height: 70px;
+    background-color: rgb(36, 36, 36);
+}
+
+main {
+    width: 100%;
+    height: calc(100vh - 140px);
+    background-color: #54717c;
+    ;
+}
+
+/* grid and box  */
+.grid {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.box {
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black; 
+}
