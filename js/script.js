@@ -1,3 +1,4 @@
+
 "use strict";
 
 
@@ -13,17 +14,13 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 - con difficoltà 2 => 81 caselle, con un numero compreso tra 1 e 81, divise in 9 caselle per 9 righe;
 - con difficoltà 3 => 49 caselle, con un numero compreso tra 1 e 49, divise in 7 caselle per 7 righe;
  
-
 <div class="grid">
         <div class="box">
           <span>1</span>
         </div>
       </div>
-
-
       width: calc(100% / 10);
     height: calc(100% / 10);
-
 */
 
 const buttonHTML = document.getElementById('btn-play');
@@ -38,6 +35,7 @@ function play() {
     const level = levelHTML.value;
     const numBomb = 16;
     const bombs = [];
+    let score = 0;
 
 
 
@@ -54,6 +52,9 @@ function play() {
 
     }
 
+    //creo una costante con il numero massimo di tentativi
+    const MAX_ATTEMP = numBox - numBomb;
+
     while (bombs.length < numBomb) {
         const bomb = randomNumber(1, numBox);
         if (!bombs.includes(bomb)) {
@@ -68,21 +69,31 @@ function play() {
         box.className = "box";
         box.style.width = `calc(100% / ${Math.sqrt(numBox)})`;
         box.style.height = `calc(100% / ${Math.sqrt(numBox)})`;
-        box.innerHTML = `
-        <span>${num}</span>
-        `
-        box.addEventListener('click', function () {
+
+        function handleClick() {
+
+            this.removeEventListener('click', handleClick);
             if (bombs.includes(num)) {
                 box.classList.add('red')
                 box.innerHTML = `
                 <i class="fa-solid fa-bomb h-80 v-80"></i>
                 `
+                gameOver();
             }
             else {
+                score++;
                 box.classList.add('cyan')
+                box.innerHTML = `
+                <i class="fa-solid fa-clover"></i>
+                `
+                //devo controllare se l'utente ha raggiunto il punteggio massimo
+                if (score == MAX_ATTEMP) {
+                    gameOver();
+                }
             }
         }
-        )
+
+        box.addEventListener('click', handleClick)
 
         return box;
     }
@@ -101,6 +112,14 @@ function play() {
     }
 
     generateGrid();
+
+    function gameOver() {
+        const squares = document.querySelectorAll('.box');
+        console.log(squares);
+        for (let i = 0; i < squares.length; i++) {
+            squares[i].removeEventListener('click', handleClick);
+        }
+    }
 
 }
 
