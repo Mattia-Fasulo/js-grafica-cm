@@ -84,7 +84,7 @@ function play() {
                 score++;
                 box.classList.add('cyan')
                 box.innerHTML = `
-                <i class="fa-solid fa-clover"></i>
+                <i class="fa-solid fa-moon h-80 v-80"></i>
                 `
                 //devo controllare se l'utente ha raggiunto il punteggio massimo
                 if (score == MAX_ATTEMP) {
